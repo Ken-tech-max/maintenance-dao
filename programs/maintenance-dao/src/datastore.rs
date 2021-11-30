@@ -1,0 +1,1 @@
+// ideally on-chain oracle that streams between solana accounts and arweave
