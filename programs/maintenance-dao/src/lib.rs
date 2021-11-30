@@ -7,7 +7,7 @@ declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 #[program]
 pub mod maintenance_dao {
     use super::*;
-    pub fn initialize(ctx: Context<Initialize>) -> ProgramResult {
+    pub fn initialize(ctx: Context<MaintenanceContext>) -> ProgramResult {
         let base_account = &mut ctx.accounts.base_account;
         Ok(())
     }
@@ -64,14 +64,7 @@ pub struct EmployeeContext<'info> {
 }
 
 
-#[derive(Accounts)]
-pub struct Initialize<'info> {
-    #[account(init, payer = user, space = 10000)]
-    pub base_account: Account<'info, BaseAccount>,
-    #[account(mut)]
-    pub user: Signer<'info>,
-    pub system_program: Program<'info, System>,
-} 
+
 
 #[account]
 pub struct Machine {
