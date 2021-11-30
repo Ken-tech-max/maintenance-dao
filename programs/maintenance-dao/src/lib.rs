@@ -72,9 +72,7 @@ pub enum MaintenanceError {
 pub struct Initialize {}
 
 #[account]
-pub struct Machine<MachinePart> {
-    components: MachinePart
-
+pub struct Machine {
 
 }
 
@@ -109,7 +107,7 @@ pub struct BaseAccount {
     pub owner: Pubkey,
 
     parts: Vec<MachinePart>,
-    machines: Vec<Machine<MachinePart>>,
+    machines: Vec<Machine>,
     maintainers: Vec<Maintainer>,
     operators: Vec<Operator>,
 
