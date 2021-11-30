@@ -32,11 +32,11 @@ pub mod maintenance_dao {
 
 }
 
-// turn this into a pda eventually
-#[state(10000)]
-pub struct Source {
-    ownership_account: BaseAccount,
-}
+// // turn this into a pda eventually
+// #[state(10000)]
+// pub struct Source {
+//     ownership_account: BaseAccount,
+// }
 #[derive(Accounts)]
 pub struct MaintenanceContext<'info> {
     #[account(init, payer = user, space = 10000)]
@@ -95,18 +95,11 @@ pub struct Maintainer {
 
 #[account]
 pub struct MaintenanceEntity {
-    employees: Box<Vec<Maintainer>>,
-    contracts: MaintenanceContract,
 
 }
 
 #[account]
 pub struct MaintenanceContract {
-    maintenance_entity: Box<MaintenanceEntity>,
-    maintainer: Box<Maintainer>,
-    time: Box<UnixTimestamp>,
-    all_parts: bool,
-    parts_list: Box<Vec<MachinePart>>,
 
 }
 
