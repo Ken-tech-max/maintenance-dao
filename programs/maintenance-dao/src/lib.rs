@@ -1,6 +1,7 @@
 use anchor_lang::{prelude::*, solana_program::clock::{UnixTimestamp, Epoch}};
 use anchor_lang::{solana_program::{log, slot_history}};
 pub mod account;
+use crate::account::*;
 
 declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 
@@ -30,11 +31,6 @@ pub mod maintenance_dao {
 
 }
 
-// // turn this into a pda eventually
-// #[state(10000)]
-// pub struct Source {
-//     ownership_account: BaseAccount,
-// }
 #[derive(Accounts)]
 pub struct MaintenanceContext<'info> {
     #[account(init, payer = user, space = 10000)]
@@ -67,56 +63,3 @@ pub struct ContractContext<'info> {
     #[account(mut)]
     pub user: Signer<'info>,
 }
-
-
-
-
-#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
-pub struct Machine {
-    // machine level maintneance includes all parts
-    last_maintained: UnixTimestamp,
-    scheduled_maintain: UnixTimestamp,
-    parts: MachinePart,
-}
-
-#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
-pub struct MachinePart {
-    // part level maintainance incluedes only that part which is reffered to
-    last_maintained: UnixTimestamp,
-    measure_of_wear: u64,
-}
-
-
-#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
-pub struct Maintainer {
-    skills: Vec<Skill>,
-}
-
-#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
-pub struct Skill {
-    pertaining_to: MachinePart,
-}
-
-#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
-pub struct MaintenanceEntity {
-    // contracts: [MaintenanceContract<UnixTimestamp, MachinePart>],
-}
-
-#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
-pub struct MaintenanceContract {
-    date: UnixTimestamp,
-    completed: bool,
-}
-
-
-#[account]
-pub struct BaseAccount {
-    pub owner: Pubkey,
-
-    parts: Vec<MachinePart>,
-    machines: Vec<Machine>,
-    maintainers: Vec<Maintainer>,
-
-}
-
-
