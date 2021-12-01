@@ -12,7 +12,9 @@ pub mod maintenance_dao {
         Ok(())
     }
 
-    // pub fn create_contract() {}
+    // pub fn create_contract() {
+
+    // }
     //    // ContractContext 
 
     // // maintain context
@@ -65,35 +67,42 @@ pub struct EmployeeContext<'info> {
 
 
 
-
 #[account]
 pub struct Machine {
-
+    // machine level maintneance includes all parts
+    last_maintained: UnixTimestamp,
+    scheduled_maintain: UnixTimestamp,
+    parts: Vec<MachinePart>,
 }
 
 #[account]
 pub struct MachinePart {
-
+    // part level maintainance incluedes only that part which is reffered to
+    last_maintained: UnixTimestamp,
+    measure_of_wear: u64,
 }
 
-#[account]
-pub struct Operator {
-
-}
 
 #[account]
 pub struct Maintainer {
+    skills: Vec<Skill>,
+}
 
+#[account]
+pub struct Skill {
+    pertaining_to: MachinePart,
 }
 
 #[account]
 pub struct MaintenanceEntity {
+    contracts: Vec<MaintenanceContract>,
 
 }
 
 #[account]
 pub struct MaintenanceContract {
-
+    date: UnixTimestamp,
+    completed: bool,
 }
 
 
@@ -104,7 +113,6 @@ pub struct BaseAccount {
     parts: Vec<MachinePart>,
     machines: Vec<Machine>,
     maintainers: Vec<Maintainer>,
-    operators: Vec<Operator>,
 
 }
 

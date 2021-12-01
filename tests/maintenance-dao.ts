@@ -14,4 +14,6 @@ describe('maintenance-dao', () => {
     const tx = await program.rpc.initialize({});
     console.log("Your transaction signature", tx);
   });
+
+  
 });
