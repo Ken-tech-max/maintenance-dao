@@ -12,14 +12,9 @@ pub mod maintenance_dao {
         Ok(())
     }
 
-    // pub fn create_contract() {
-
-    // }
-    //    // ContractContext 
 
     // // maintain context
     // pub fn run_maintenance_all() {}
-    
     // pub fn run_maintenance_single() {}
     // pub fn run_maintenance_choice() {}
     // pub fn schedule_maintenance() {}
@@ -65,17 +60,26 @@ pub struct EmployeeContext<'info> {
     pub user: Signer<'info>,
 }
 
+#[derive(Accounts)]
+pub struct ContractContext<'info> {
+    #[account(mut)]
+    pub base_account: Account<'info, BaseAccount>,
+    #[account(mut)]
+    pub user: Signer<'info>,
+}
 
 
-#[account]
+
+
+#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
 pub struct Machine {
     // machine level maintneance includes all parts
     last_maintained: UnixTimestamp,
     scheduled_maintain: UnixTimestamp,
-    parts: Vec<MachinePart>,
+    parts: MachinePart,
 }
 
-#[account]
+#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
 pub struct MachinePart {
     // part level maintainance incluedes only that part which is reffered to
     last_maintained: UnixTimestamp,
@@ -83,23 +87,22 @@ pub struct MachinePart {
 }
 
 
-#[account]
+#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
 pub struct Maintainer {
     skills: Vec<Skill>,
 }
 
-#[account]
+#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
 pub struct Skill {
     pertaining_to: MachinePart,
 }
 
-#[account]
+#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
 pub struct MaintenanceEntity {
-    contracts: Vec<MaintenanceContract>,
-
+    // contracts: [MaintenanceContract<UnixTimestamp, MachinePart>],
 }
 
-#[account]
+#[derive(Clone, AnchorSerialize, AnchorDeserialize)]
 pub struct MaintenanceContract {
     date: UnixTimestamp,
     completed: bool,
