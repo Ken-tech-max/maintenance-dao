@@ -1,1 +1,1 @@
-// ideally on-chain oracle that streams between solana accounts and arweave
+// connection to oraclele that streams between solana accounts and arweave, or just a bridge
