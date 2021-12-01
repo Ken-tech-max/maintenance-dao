@@ -20,7 +20,6 @@ pub struct State {
 
 // }
 
-// from tesla model s parts catolog
 #[derive(Clone, AnchorDeserialize, AnchorSerialize)]
 pub enum Part {
     bumper_and_fascia,
@@ -118,7 +117,7 @@ pub struct Machine {
     // machine level maintneance includes all parts
     last_maintained: UnixTimestamp,
     scheduled_maintain: UnixTimestamp,
-    parts: MachinePart,
+    parts: Vec<MachinePart>,
 }
 
 
@@ -128,32 +127,6 @@ pub struct MachinePart {
     kind: Part,
     last_maintained: UnixTimestamp,
     measure_of_wear: u64,
-
-    // // setting part will include check that it is 
-    // the only true value
-    // bumper_and_fascia: bool,
-    // body_panels: bool,
-    // windshield_and_body_glass: bool,
-    // liftgate: bool,
-    // closure_assist: bool,
-    // mechanisms_and_hinges: bool,
-    // exterior_door_handles: bool,
-    // door_glass_regulators: bool,
-    // seals_body_closures: bool,
-    // wheel_arch_liners: bool,
-    // undertray_and_diffuser: bool,
-    // badges_and_films: bool,
-    // license_plate_mountings: bool,
-    // exterior_mirrors: bool,
-    // exterior_trim: bool,
-    // underhood_trim: bool,
-    // liftgate_through_trim: bool,
-    // front_seat_tracks_and_motors: bool,
-    // front_seat_assemblies_and_hardware: bool,
-    // second_row_seat_assemblies_and_hardware: bool,
-    // front_seat_covers_pads_trims: bool,
-    // second_row_seat_covers_pads_trims: bool,
-    // instrument_panel: bool,
 
 }
 

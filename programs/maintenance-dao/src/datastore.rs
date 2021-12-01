@@ -1,1 +1,1 @@
-// connection to oraclele that streams between solana accounts and arweave, or just a bridge
+// bridge to arweave
