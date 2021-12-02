@@ -1,1 +1,1 @@
-// bridge to arweave
+// bridge to datastore

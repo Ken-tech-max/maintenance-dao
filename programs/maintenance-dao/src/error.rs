@@ -1,14 +1,16 @@
-#[error]
-pub enum MaintenanceError {
-    #[msg("")]
-    Maintenance,
-}
+use anchor_lang::error;
+
+
+// #[derive(Accounts)]
+// pub struct ScheduleError {}
 
 // #[error]
-// pub enum PartConflictError {
-//     #[msg("Part type already set.")]
-//     PartConflict,
+// pub enum SchedulingError {
+//     #[msg("Scheduling cannot be placed in past.")]
+//     ScheduleError
+
 // }
+
 
 // error for each context
 // be as precise as possible

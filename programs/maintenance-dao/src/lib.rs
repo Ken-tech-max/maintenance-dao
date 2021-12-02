@@ -1,17 +1,34 @@
 use anchor_lang::{prelude::*, solana_program::clock::{UnixTimestamp, Epoch}};
 use anchor_lang::{solana_program::{log, slot_history}};
 pub mod account;
+pub mod context;
+pub mod error;
+use crate::context::*;
 use crate::account::*;
+use crate::error::*;
+
+
 
 declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 
 #[program]
 pub mod maintenance_dao {
     use super::*;
-    pub fn initialize(ctx: Context<MaintenanceContext>) -> ProgramResult {
-        let base_account = &mut ctx.accounts.base_account;
+    pub fn create_factory(
+        ctx: Context<MaintenanceContext>, 
+        machines: Vec<Machine>,
+        maintainers: Vec<Maintainer>,
+        initial_maintenance: UnixTimestamp,
+    ) -> ProgramResult {
+        let base_account= &mut ctx.accounts.base_account;
+
+        if initial_maintenance < Clock::default().unix_timestamp {
+            // throw error
+        }
+       
+        //
         Ok(())
-    }
+}
 
     // pub fn run_maintenance_all()
 
@@ -31,37 +48,4 @@ pub mod maintenance_dao {
     // pub fn change_maintainer() {}
     // pub fn change_operator() {}
 
-}
-
-#[derive(Accounts)]
-pub struct MaintenanceContext<'info> {
-    #[account(init, payer = user, space = 10000)]
-    pub base_account: Account<'info, BaseAccount>,
-    #[account(mut)]
-    pub user: Signer<'info>,
-    pub system_program: Program<'info, System>
-}
-
-#[derive(Accounts)]
-pub struct PartContext<'info> {
-    #[account(mut)]
-    pub base_account: Account<'info, BaseAccount>,
-    #[account(mut)]
-    pub user: Signer<'info>,
-}
-
-#[derive(Accounts)]
-pub struct EmployeeContext<'info> {
-    #[account(mut)]
-    pub base_account: Account<'info, BaseAccount>,
-    #[account(mut)]
-    pub user: Signer<'info>,
-}
-
-#[derive(Accounts)]
-pub struct ContractContext<'info> {
-    #[account(mut)]
-    pub base_account: Account<'info, BaseAccount>,
-    #[account(mut)]
-    pub user: Signer<'info>,
 }
